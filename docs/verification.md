@@ -15,6 +15,13 @@ actual result. Do not equate a successful cross-platform import with native inpu
 
 ## Live boundaries
 
+v1.0.0 passed all three platform build jobs and the release publication job. A clean
+pipx install from the published tag passes `--check` outside the source directory.
+Homebrew install and `brew test fire17/tap/humming-bird` pass. The downloaded macOS
+release ZIP matches its published SHA-256; the installed app's embedded binary passes
+the same asset check. The frozen Mac game launched a five-bird flock through a PTY and
+exited without orphaned workers.
+
 The development garden has been visually iterated in a real macOS WezTerm window,
 including multi-bird overlap, resize, extended-world camera, and approved artwork.
 The frozen release build is exercised through a local PTY. Desktop-control access to

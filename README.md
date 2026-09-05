@@ -2,7 +2,7 @@
 
 <div align="center"><img width="100%" src="assets/banner.svg" alt="Humming Bird — a little neon wilderness"></div>
 
-[![Build](https://github.com/fire17/humming-bird/actions/workflows/ci.yml/badge.svg)](https://github.com/fire17/humming-bird/actions/workflows/ci.yml)
+[![Build](https://github.com/fire17/humming-bird/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/fire17/humming-bird/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/fire17/humming-bird)](https://github.com/fire17/humming-bird/releases)
 [![MIT](https://img.shields.io/badge/license-MIT-a78bfa)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-38bdf8)](pyproject.toml)
@@ -47,6 +47,13 @@ approach poses. No image-generation service, Chafa, or GPU is needed to play.
 > A living terminal garden—not a looping video or a single emoji.
 
 ## Install
+
+**macOS / Linux with Homebrew:**
+
+```sh
+brew install fire17/tap/humming-bird
+humming-bird
+```
 
 **Fastest portable install** (Python 3.10+ and [pipx](https://pipx.pypa.io/)):
 
@@ -147,6 +154,7 @@ as a workaround. The original Chafa conversion uses `--font-ratio 3/8 --size 32x
 | Terminal state | Input mode and cursor restored on normal exit / Ctrl+C |
 | Processes | One worker per companion, bounded to 23; workers shut down with the game |
 | Uninstall pipx | `pipx uninstall humming-bird-game` |
+| Uninstall Homebrew | `brew uninstall humming-bird` |
 | Uninstall download | Remove the extracted app directory; settings are kept separately |
 | Reset preferences | Rename the settings file to `settings.json.bak` while the game is closed |
 
