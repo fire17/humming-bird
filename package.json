@@ -8,7 +8,7 @@
 	"scripts": {
 		"build": "bun scripts/build_web.mjs",
 		"dev": "bun scripts/serve_web.mjs",
-		"test": "node scripts/test_web_runtime.mjs"
+		"test": "node scripts/test_web_runtime.mjs && node scripts/test_web_renderer.mjs"
 	},
 	"type": "module",
 	"devDependencies": {

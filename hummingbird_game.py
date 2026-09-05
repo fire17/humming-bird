@@ -27,6 +27,23 @@ REST_WEIGHTS = (1.0, 1.0, 0.5, 1.0 / 3.0, 0.25)
 DEFAULT_NECTAR_LIMIT = 50
 MAX_NECTAR_LIMIT = 60
 DOUBLE_CLICK_SECONDS = 0.38
+TRAIL_COLORS = ("00b9d7", "086e91", "173e69")
+RETICLE_CELL = Char(data="+", fg="7befff", bold=True)
+
+
+def trail_cell(spark, now: float) -> Char:
+    """One shared fade rule for terminal and browser movement/capture effects."""
+    age = (now - spark.born_at) / spark.lifetime
+    return Char(data="·", fg=TRAIL_COLORS[2 if age > 0.66 else (1 if age > 0.33 else 0)])
+
+
+def perch_cell(cell: Char, selected: bool) -> Char:
+    if selected or cell.fg in {"default", "000000"}:
+        return cell
+    red = int(cell.fg[0:2], 16) // 2
+    green = int(cell.fg[2:4], 16) * 3 // 4
+    blue = int(cell.fg[4:6], 16) // 2
+    return cell._replace(fg=f"{red:02x}{green:02x}{blue:02x}")
 
 
 @dataclass
@@ -1050,10 +1067,8 @@ class GameRenderer:
         if not world.playable:
             return scene
 
-        for spark in world.trail:
-            age = (now - spark.born_at) / spark.lifetime
-            color = "173e69" if age > 0.66 else ("086e91" if age > 0.33 else "00b9d7")
-            self._put(scene, spark.x - cx, spark.y - cy, Char(data="·", fg=color), width, height)
+        back_effects, front_effects = self.effect_layers(world, now)
+        scene.update(back_effects)
 
         if world.compact:
             for perch in world.leaves:
@@ -1062,13 +1077,7 @@ class GameRenderer:
         else:
             for index, perch in enumerate(world.leaves):
                 for (local_x, local_y), cell in self.leaf_cells.items():
-                    tint = cell
-                    if index != world.target_leaf and cell.fg not in {"default", "000000"}:
-                        # Preserve the glyph/background but quiet unselected perches.
-                        red = int(cell.fg[0:2], 16) // 2
-                        green = int(cell.fg[2:4], 16) * 3 // 4
-                        blue = int(cell.fg[4:6], 16) // 2
-                        tint = cell._replace(fg=f"{red:02x}{green:02x}{blue:02x}")
+                    tint = perch_cell(cell, index == world.target_leaf)
                     self._put(scene, perch.x + local_x - cx, perch.y + local_y - cy, tint, width, height)
 
         for heart in world.hearts:
@@ -1087,11 +1096,25 @@ class GameRenderer:
                 companion.wing_position, companion.hue_shift,
             )
 
-        if now < world.reticle_until:
-            self._put(scene, world.reticle_x, world.reticle_y, Char(data="+", fg="7befff", bold=True), width, height)
+        scene.update(front_effects)
 
         self._draw_bird(
             scene, world, world.bird_x, world.bird_y, world.facing,
             world.wing_position,
         )
         return scene
+
+    @staticmethod
+    def effect_layers(world: GameWorld, now: float):
+        """Screen-cell effects in the exact native order, also consumed by web."""
+        back, front = {}, {}
+        if not world.playable:
+            return back, front
+        cx, cy = world.camera_cell
+        for spark in world.trail:
+            GameRenderer._put(back, spark.x-cx, spark.y-cy, trail_cell(spark, now),
+                              world.width, world.height)
+        if now < world.reticle_until:
+            GameRenderer._put(front, world.reticle_x, world.reticle_y, RETICLE_CELL,
+                              world.width, world.height)
+        return back, front

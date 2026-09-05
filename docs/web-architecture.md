@@ -21,6 +21,13 @@ terminal baseline. WebGL batches the scene in one draw and performs HSL hue shif
 in a shader. A Canvas fallback is available (its hue rotation is approximate).
 There is no per-frame raster generation or thousands-of-DOM-nodes renderer.
 
+Effects use `GameRenderer.effect_layers()` directly: the main bird's movement
+trail and five-dot collection bursts sit behind the scene, while the planting
+marker sits between companions and the player. Colors, clipping and lifetimes
+come from the native engine. Effect sprites draw only one cell, retaining the
+single GPU batch without large transparent overdraw. Unselected grass uses the
+native `perch_cell()` tint. Browser draw-order/camera tests guard these contracts.
+
 ## Automatic update contract
 
 Edit the canonical repository, not a historical `/sas` snapshot. Every push to

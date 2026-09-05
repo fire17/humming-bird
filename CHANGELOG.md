@@ -1,5 +1,13 @@
 # Changelog
 
+## Web effects parity — 2026-09-05
+
+- Restore the native main-bird movement trail, five-dot nectar capture bursts,
+  shared color fade/lifetimes, transient planting marker and capture feedback.
+- Match native effect layer ordering and unselected-perch tint; retain all 69
+  original approved art tiles pixel-for-pixel. Effects use one-cell GPU quads.
+- Native behavior is unchanged: the existing effect rules are now shared with web.
+
 ## 1.1.0 — 2026-09-05
 
 - Playable web garden with the same Python/WASM flight engine and approved art.

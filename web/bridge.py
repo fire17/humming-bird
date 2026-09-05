@@ -9,7 +9,7 @@ from dataclasses import asdict
 
 from hummingbird_brain import AutonomousBirdBrain
 from hummingbird_flock import assign_targets, step_brain
-from hummingbird_game import GameWorld, RemoteBird
+from hummingbird_game import GameWorld, GameRenderer, RemoteBird
 
 
 class BrowserGame:
@@ -113,6 +113,10 @@ class BrowserGame:
 
     def snapshot(self):
         w = self.world
+        back, front = GameRenderer.effect_layers(w, self.now)
+        effects = {name: [[column, row, cell.data + ':' + cell.fg]
+                         for (row, column), cell in layer.items()]
+                   for name, layer in (('back', back), ('front', front))}
         birds = [asdict(p) for p in self.peers.values() if p is not None]
         birds.append(dict(ident=1, x=w.bird_x, y=w.bird_y, facing=w.facing,
             wing_position=w.wing_position, hue_shift=0, state=w.state,
@@ -120,9 +124,10 @@ class BrowserGame:
         return dict(time=self.now, width=w.width, height=w.height, camera=w.camera_cell,
                     birds=birds, hearts=[asdict(h) for h in w.hearts],
                     leaves=[asdict(leaf) for leaf in w.leaves], target_leaf=w.target_leaf,
-                    trail=[asdict(spark) for spark in w.trail], score=w.score,
+                    trail=[asdict(spark) for spark in w.trail], effects=effects, score=w.score,
                     combo=w.combo, collected=w.collected, heart_limit=w.heart_limit,
-                    compact=w.compact, message=w.status(self.now)[1], settings=self.settings())
+                    compact=w.compact, message=w.status(self.now)[1],
+                    event_message=w.message if self.now < w.message_until else '', settings=self.settings())
 
 
 game = None

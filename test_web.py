@@ -7,10 +7,41 @@ import zipfile
 
 from web.bridge import BrowserGame
 from hummingbird_brain import AutonomousBirdBrain
-from hummingbird_game import GameWorld
+from hummingbird_game import GameWorld, GameRenderer, TrailSpark, trail_cell, perch_cell
+from pyte.screens import Char
 
 
 class WebEngineTests(unittest.TestCase):
+    def test_movement_and_capture_effects_use_native_cells(self):
+        game = BrowserGame(seed=17, settings=dict(auto_spawn=False, player_mode=True))
+        game.command(dict(op='input', x=1, y=-1))
+        for _ in range(12): game.tick()
+        self.assertGreater(len(game.world.trail), 0)
+        heart = game.world.hearts[0]
+        game.world._collect(heart, game.now)
+        self.assertEqual(sum(s.lifetime == .85 for s in game.world.trail), 5)
+        state = game.snapshot()
+        for layer, cells in zip(('back', 'front'), GameRenderer.effect_layers(game.world, game.now)):
+            self.assertEqual(state['effects'][layer],
+                             [[x,y,cell.data+':'+cell.fg] for (y,x),cell in cells.items()])
+        self.assertIn('+', state['event_message'])
+
+    def test_effect_fade_and_camera_clipping(self):
+        spark = TrailSpark(30,20,0,.6)
+        self.assertEqual([trail_cell(spark,t).fg for t in (0,.2,.4)],
+                         ['00b9d7','086e91','173e69'])
+        game = BrowserGame(seed=17)
+        world = game.world
+        world.camera_x, world.camera_y = 10,10
+        world.trail = [spark, TrailSpark(-10,0,0), TrailSpark(30,10,0)]
+        world.set_reticle(12,5,0)
+        back,front = GameRenderer.effect_layers(world,.1)
+        self.assertEqual(set(back),{(10,20)})
+        self.assertEqual(set(front),{(5,12)})  # reticle is already screen-relative
+        self.assertEqual(GameRenderer.effect_layers(world,.5)[1],{})
+        self.assertEqual(perch_cell(Char(data='▀',fg='80c040',bg='00ff00'),False).fg,'409020')
+        self.assertEqual(perch_cell(Char(data='▀',fg='80c040',bg='00ff00'),False).bg,'00ff00')
+
     def test_uses_native_engine_for_every_bird(self):
         game = BrowserGame(seed=17)
         self.assertIs(type(game.world), GameWorld)

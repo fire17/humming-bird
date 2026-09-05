@@ -43,6 +43,12 @@ function updateUI() {
 	$("score").textContent = state.score.toLocaleString();
 	$("nectar").textContent = `${state.hearts.length}/${state.heart_limit}`;
 	$("flock").textContent = settings.flock_count;
+	$("hint").textContent =
+		state.event_message ||
+		"Double-click anywhere to plant nectar · or watch the flock explore";
+	// Observable diagnostics for parity/performance checks, without exposing game internals.
+	canvas.dataset.effectCount =
+		(state.effects?.back.length || 0) + (state.effects?.front.length || 0);
 	$("birds").value = settings.flock_count;
 	$("birds-value").textContent = settings.flock_count;
 	$("hearts").value = settings.nectar_limit;

@@ -77,17 +77,42 @@ export class GardenRenderer {
 			[cx, cy] = state.camera;
 		const cw = this.width / state.width,
 			ch = this.height / state.height;
-		const add = (index, x, y, hue = 0, mirror = false) =>
+		const add = (
+			index,
+			x,
+			y,
+			hue = 0,
+			mirror = false,
+			columns = 32,
+			rows = 12,
+		) =>
 			sprites.push({
 				index,
 				x: (x - cx) * cw,
 				y: (y - cy) * ch,
-				w: 32 * cw,
-				h: 12 * ch,
+				w: columns * cw,
+				h: rows * ch,
+				sw: columns * 8,
+				sh: rows * 8,
 				hue,
 				mirror,
 			});
-		state.leaves.forEach((leaf) => add(this.meta.leaf, leaf.x, leaf.y));
+		// Effects arrive in screen cells from the native renderer; do not subtract
+		// the scrolling camera twice. Same layer order as GameRenderer.scene().
+		const addEffects = (layer) => {
+			for (const [x, y, style] of layer || []) {
+				const index = this.meta.effects[style];
+				if (index !== undefined) add(index, x + cx, y + cy, 0, false, 1, 1);
+			}
+		};
+		addEffects(state.effects?.back);
+		state.leaves.forEach((leaf, index) =>
+			add(
+				index === state.target_leaf ? this.meta.leaf : this.meta.dimLeaf,
+				leaf.x,
+				leaf.y,
+			),
+		);
 		state.hearts.forEach((heart) =>
 			add(
 				this.meta.frames +
@@ -98,15 +123,17 @@ export class GardenRenderer {
 				heart.y,
 			),
 		);
-		state.birds.forEach((bird) =>
+		const addBird = (bird) =>
 			add(
 				Math.floor(bird.wing_position) % this.meta.frames,
 				bird.x,
 				bird.y,
 				bird.hue_shift,
 				bird.facing < 0,
-			),
-		);
+			);
+		state.birds.filter((bird) => bird.ident !== 1).forEach(addBird);
+		addEffects(state.effects?.front);
+		state.birds.filter((bird) => bird.ident === 1).forEach(addBird);
 		if (this.gl) {
 			const gl = this.gl,
 				vertices = [];
@@ -114,10 +141,10 @@ export class GardenRenderer {
 				const sx = (s.index % 10) * 256,
 					sy = Math.floor(s.index / 10) * 96;
 				let u0 = sx / this.meta.atlasWidth,
-					u1 = (sx + 256) / this.meta.atlasWidth;
+					u1 = (sx + s.sw) / this.meta.atlasWidth;
 				if (s.mirror) [u0, u1] = [u1, u0];
 				const v0 = sy / this.meta.atlasHeight,
-					v1 = (sy + 96) / this.meta.atlasHeight;
+					v1 = (sy + s.sh) / this.meta.atlasHeight;
 				for (const [x, y, u, v] of [
 					[s.x, s.y, u0, v0],
 					[s.x + s.w, s.y, u1, v0],
@@ -152,8 +179,8 @@ export class GardenRenderer {
 					this.image,
 					(s.index % 10) * 256,
 					Math.floor(s.index / 10) * 96,
-					256,
-					96,
+					s.sw,
+					s.sh,
 					0,
 					0,
 					s.w,
