@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "humming-bird-game"
+version = "1.0.0"
+description = "A living neon hummingbird garden in your terminal"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "fire17"}]
+dependencies = ["pyte==0.8.2", "wcwidth==0.2.13"]
+
+[project.urls]
+Homepage = "https://github.com/fire17/humming-bird"
+Issues = "https://github.com/fire17/humming-bird/issues"
+
+[project.scripts]
+humming-bird = "hummingbird_cli:main"
+
+[tool.setuptools]
+py-modules = ["hummingbird_cli", "hummingbird_tui", "hummingbird_terminal", "hummingbird_game", "hummingbird_brain", "hummingbird_swarm"]
+packages = ["humming_bird_assets"]
+
+[tool.setuptools.package-data]
+humming_bird_assets = ["**/*.ansi", "true60-cycle/manifest.json"]

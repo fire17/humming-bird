@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Humming Bird — a living terminal garden</title>
+<meta name="description" content="A neon hummingbird garden for macOS, Linux, WSL and Windows. Plant hearts, pilot a bird, or let a colorful flock play itself.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="alternate icon" href="assets/favicon.png" type="image/png">
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#080b16;color:#eeeefa}body{max-width:980px;margin:5vh auto;padding:24px}img{width:100%;border-radius:24px}h1{font-size:clamp(30px,5vw,58px);letter-spacing:-2px}p{color:#aebbd4;font-size:20px;line-height:1.7;max-width:740px}nav{display:flex;flex-wrap:wrap;gap:15px;margin:32px 0}a{color:#46d9e7;text-decoration:none}nav a{padding:14px 24px;border:1px solid #34445f;border-radius:12px}nav a:first-child{background:#974ee7;color:white;border-color:#974ee7}pre{padding:24px;border:1px solid #2a3450;border-radius:16px;overflow:auto;color:#f4b4eb}section{margin:56px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}.grid p{font-size:16px}footer{border-top:1px solid #29324a;padding-top:24px;color:#9ba8c3;font-size:14px}
+</style>
+</head>
+<body>
+<img src="assets/banner.svg" alt="Humming Bird: a neon terminal-art bird in magenta, violet and cyan">
+<h1>Let your terminal breathe.</h1>
+<p>Double-click to plant a heart. Watch a hummingbird find it, feed, and settle on a blade of grass. Or take the controls and fly with a whole neon flock.</p>
+<nav><a href="https://github.com/fire17/humming-bird/releases/latest">Download the app</a><a href="https://github.com/fire17/humming-bird">View on GitHub</a></nav>
+<section><h2>One command. Four platforms.</h2><pre>pipx install git+https://github.com/fire17/humming-bird.git@v1.0.0
+humming-bird</pre><p>macOS · Linux · WSL · Windows PowerShell. Prefer no Python? Grab a self-contained release for Apple Silicon Mac, x86-64 Linux, or Windows.</p></section>
+<section class="grid"><div><h2>Play</h2><p>Momentum, responsive steering, beak-based feeding and scores. Press P to pilot; N keeps the garden full.</p></div><div><h2>Drift</h2><p>Press O for randomized nectar waves. Set a flock size and leave a little living screensaver on your desktop.</p></div><div><h2>Explore</h2><p>Press E for an extended world. The camera follows your bird toward any edge, with leaves and hearts staying in place.</p></div></section>
+<section><h2>Small cells. Careful motion.</h2><p>60 wing poses, independent spinning hearts, and a 30 Hz renderer. Real multi-cell Unicode art—not an emoji. No telemetry, no runtime network, no global keyboard hooks.</p></section>
+<footer>Made by <a href="https://github.com/fire17">fire17</a> · MIT · <a href="https://github.com/fire17/humming-bird#install">Install &amp; terminal compatibility</a>. Downloads are not Apple-notarized / Windows-signed. WSL uses the Linux build.</footer>
+</body></html>

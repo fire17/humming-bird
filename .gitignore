@@ -1,0 +1,14 @@
+conversation/
+files/
+.save_and_ship/
+CONTINUE.md
+.project/
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+*.spec
+.DS_Store
+private-evidence/

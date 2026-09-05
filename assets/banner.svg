@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360">
+<rect width="1200" height="360" rx="24" fill="#080b16"/>
+<path d="M40 320H1160" stroke="#29324a"/>
+<g transform="translate(28 25)" font-family="Menlo,DejaVu Sans Mono,monospace" font-size="25">
+<rect x="60" y="48" width="10" height="24" fill="#7e2558"/>
+<text x="60" y="69" fill="#000000">▊</text>
+<rect x="70" y="48" width="10" height="24" fill="#e4489f"/>
+<text x="70" y="69" fill="#86275e">▂</text>
+<rect x="80" y="48" width="10" height="24" fill="#290c1c"/>
+<text x="80" y="69" fill="#ed4aa8">▅</text>
+<rect x="90" y="48" width="10" height="24" fill="#0c0308"/>
+<text x="90" y="69" fill="#b93784">▃</text>
+<rect x="100" y="48" width="10" height="24" fill="#000000"/>
+<text x="100" y="69" fill="#481234">▁</text>
+<rect x="70" y="72" width="10" height="24" fill="#7d2758"/>
+<text x="70" y="93" fill="#060104">▊</text>
+<rect x="80" y="72" width="10" height="24" fill="#c83e8f"/>
+<text x="80" y="93" fill="#000000">⠒</text>
+<rect x="90" y="72" width="10" height="24" fill="#e142a3"/>
+<text x="90" y="93" fill="#330f24">─</text>
+<rect x="100" y="72" width="10" height="24" fill="#cd329a"/>
+<text x="100" y="93" fill="#230518">⣈</text>
+<rect x="110" y="72" width="10" height="24" fill="#410933"/>
+<text x="110" y="93" fill="#bd14a1">▅</text>
+<rect x="120" y="72" width="10" height="24" fill="#190017"/>
+<text x="120" y="93" fill="#ce06c2">▄</text>
+<rect x="130" y="72" width="10" height="24" fill="#080008"/>
+<text x="130" y="93" fill="#ab01ab">▁</text>
+<rect x="80" y="96" width="10" height="24" fill="#300e23"/>
+<text x="80" y="117" fill="#be3b8b">┗</text>
+<rect x="90" y="96" width="10" height="24" fill="#872863"/>
+<text x="90" y="117" fill="#d943a4">▅</text>
+<rect x="100" y="96" width="10" height="24" fill="#d739a6"/>
+<text x="100" y="117" fill="#531240">━</text>
+<rect x="110" y="96" width="10" height="24" fill="#c817b2"/>
+<text x="110" y="117" fill="#010001">─</text>
+<rect x="120" y="96" width="10" height="24" fill="#750375"/>
+<text x="120" y="117" fill="#d105d5">━</text>
+<rect x="130" y="96" width="10" height="24" fill="#cf01d3"/>
+<text x="130" y="117" fill="#6f0278">▅</text>
+<rect x="140" y="96" width="10" height="24" fill="#370038"/>
+<text x="140" y="117" fill="#ad01b7">▆</text>
+<rect x="150" y="96" width="10" height="24" fill="#000000"/>
+<text x="150" y="117" fill="#90019a">▖</text>
+<rect x="170" y="96" width="10" height="24" fill="#000000"/>
+<text x="170" y="117" fill="#350d26">▁</text>
+<rect x="180" y="96" width="10" height="24" fill="#140013"/>
+<text x="180" y="117" fill="#cb10b2">▃</text>
+<rect x="190" y="96" width="10" height="24" fill="#000000"/>
+<text x="190" y="117" fill="#98049d">▅</text>
+<rect x="200" y="96" width="10" height="24" fill="#000000"/>
+<text x="200" y="117" fill="#811e98">▅</text>
+<rect x="210" y="96" width="10" height="24" fill="#09000c"/>
+<text x="210" y="117" fill="#6f049d">▄</text>
+<rect x="220" y="96" width="10" height="24" fill="#000000"/>
+<text x="220" y="117" fill="#8138cf">▁</text>
+<rect x="230" y="96" width="10" height="24" fill="#000000"/>
+<text x="230" y="117" fill="#8a57d0">▁</text>
+<rect x="240" y="96" width="10" height="24" fill="#000000"/>
+<text x="240" y="117" fill="#8760ce">▁</text>
+<rect x="250" y="96" width="10" height="24" fill="#000000"/>
+<text x="250" y="117" fill="#8a70c9">▁</text>
+<rect x="260" y="96" width="10" height="24" fill="#000000"/>
+<text x="260" y="117" fill="#6f669a">▁</text>
+<rect x="90" y="120" width="10" height="24" fill="#1b0816"/>
+<text x="90" y="141" fill="#9b3382">▝</text>
+<rect x="100" y="120" width="10" height="24" fill="#aa3999"/>
+<text x="100" y="141" fill="#000000">▔</text>
+<rect x="110" y="120" width="10" height="24" fill="#a52aae"/>
+<text x="110" y="141" fill="#0a000a">▔</text>
+<rect x="120" y="120" width="10" height="24" fill="#600e71"/>
+<text x="120" y="141" fill="#bf1cda">━</text>
+<rect x="130" y="120" width="10" height="24" fill="#3f0751"/>
+<text x="130" y="141" fill="#a50fc7">┙</text>
+<rect x="140" y="120" width="10" height="24" fill="#0d0011"/>
+<text x="140" y="141" fill="#c300d8">⠈</text>
+<rect x="150" y="120" width="10" height="24" fill="#9b04ac"/>
+<text x="150" y="141" fill="#0b000a">▃</text>
+<rect x="160" y="120" width="10" height="24" fill="#000000"/>
+<text x="160" y="141" fill="#811a71">▅</text>
+<rect x="170" y="120" width="10" height="24" fill="#e03bb3"/>
+<text x="170" y="141" fill="#360c27">▘</text>
+<rect x="180" y="120" width="10" height="24" fill="#a51bf1"/>
+<text x="180" y="141" fill="#d92cd8">▊</text>
+<rect x="190" y="120" width="10" height="24" fill="#8324e0"/>
+<text x="190" y="141" fill="#321849">▝</text>
+<rect x="200" y="120" width="10" height="24" fill="#5b5a5b"/>
+<text x="200" y="141" fill="#5134df">▅</text>
+<rect x="210" y="120" width="10" height="24" fill="#4c21b1"/>
+<text x="210" y="141" fill="#100c32">▃</text>
+<rect x="220" y="120" width="10" height="24" fill="#5d2bac"/>
+<text x="220" y="141" fill="#000003">▅</text>
+<rect x="230" y="120" width="10" height="24" fill="#07040b"/>
+<text x="230" y="141" fill="#a367f6">▔</text>
+<rect x="240" y="120" width="10" height="24" fill="#07050b"/>
+<text x="240" y="141" fill="#a073f3">▔</text>
+<rect x="250" y="120" width="10" height="24" fill="#07060b"/>
+<text x="250" y="141" fill="#a284ec">▔</text>
+<rect x="260" y="120" width="10" height="24" fill="#050508"/>
+<text x="260" y="141" fill="#8278b5">▔</text>
+<rect x="50" y="144" width="10" height="24" fill="#000000"/>
+<text x="50" y="165" fill="#160b20">▕</text>
+<rect x="60" y="144" width="10" height="24" fill="#814db1"/>
+<text x="60" y="165" fill="#07040b">▄</text>
+<rect x="70" y="144" width="10" height="24" fill="#362050"/>
+<text x="70" y="165" fill="#9c5de0">┻</text>
+<rect x="80" y="144" width="10" height="24" fill="#000000"/>
+<text x="80" y="165" fill="#7a49be">▅</text>
+<rect x="90" y="144" width="10" height="24" fill="#0a0413"/>
+<text x="90" y="165" fill="#5c399f">▃</text>
+<rect x="100" y="144" width="10" height="24" fill="#100518"/>
+<text x="100" y="165" fill="#643cc6">▃</text>
+<rect x="110" y="144" width="10" height="24" fill="#a738cc"/>
+<text x="110" y="165" fill="#201343">▆</text>
+<rect x="120" y="144" width="10" height="24" fill="#692cab"/>
+<text x="120" y="165" fill="#020007">▃</text>
+<rect x="130" y="144" width="10" height="24" fill="#251048"/>
+<text x="130" y="165" fill="#6332bc">┛</text>
+<rect x="140" y="144" width="10" height="24" fill="#0b0417"/>
+<text x="140" y="165" fill="#663bd3">▃</text>
+<rect x="150" y="144" width="10" height="24" fill="#220734"/>
+<text x="150" y="165" fill="#813cde">▆</text>
+<rect x="160" y="144" width="10" height="24" fill="#a53de6"/>
+<text x="160" y="165" fill="#474cea">▁</text>
+<rect x="170" y="144" width="10" height="24" fill="#8844ea"/>
+<text x="170" y="165" fill="#1753e1">▁</text>
+<rect x="180" y="144" width="10" height="24" fill="#6840eb"/>
+<text x="180" y="165" fill="#2c4de4">▅</text>
+<rect x="190" y="144" width="10" height="24" fill="#1b49df"/>
+<text x="190" y="165" fill="#0046a4">▁</text>
+<rect x="200" y="144" width="10" height="24" fill="#021135"/>
+<text x="200" y="165" fill="#1145d0">▘</text>
+<rect x="80" y="168" width="10" height="24" fill="#000000"/>
+<text x="80" y="189" fill="#2f1e61">▝</text>
+<rect x="90" y="168" width="10" height="24" fill="#5233ab"/>
+<text x="90" y="189" fill="#000000">▅</text>
+<rect x="100" y="168" width="10" height="24" fill="#3c2787"/>
+<text x="100" y="189" fill="#000309">▄</text>
+<rect x="110" y="168" width="10" height="24" fill="#13123e"/>
+<text x="110" y="189" fill="#2338a8">▗</text>
+<rect x="120" y="168" width="10" height="24" fill="#000000"/>
+<text x="120" y="189" fill="#3a41ce">▆</text>
+<rect x="130" y="168" width="10" height="24" fill="#5445e5"/>
+<text x="130" y="189" fill="#2a4fe3">▂</text>
+<rect x="140" y="168" width="10" height="24" fill="#594bee"/>
+<text x="140" y="189" fill="#2153e1">▂</text>
+<rect x="150" y="168" width="10" height="24" fill="#4b4fea"/>
+<text x="150" y="189" fill="#0955d2">▂</text>
+<rect x="160" y="168" width="10" height="24" fill="#404fe9"/>
+<text x="160" y="189" fill="#0b56d1">▅</text>
+<rect x="170" y="168" width="10" height="24" fill="#095bd9"/>
+<text x="170" y="189" fill="#00387c">▂</text>
+<rect x="180" y="168" width="10" height="24" fill="#0159cc"/>
+<text x="180" y="189" fill="#000c1d">▄</text>
+<rect x="190" y="168" width="10" height="24" fill="#003379"/>
+<text x="190" y="189" fill="#000308">▆</text>
+<rect x="80" y="192" width="10" height="24" fill="#000406"/>
+<text x="80" y="213" fill="#005370">▁</text>
+<rect x="90" y="192" width="10" height="24" fill="#00121f"/>
+<text x="90" y="213" fill="#00a3e0">▃</text>
+<rect x="100" y="192" width="10" height="24" fill="#0072bb"/>
+<text x="100" y="213" fill="#011433">▔</text>
+<rect x="110" y="192" width="10" height="24" fill="#015fce"/>
+<text x="110" y="213" fill="#00375f">▄</text>
+<rect x="120" y="192" width="10" height="24" fill="#0058bf"/>
+<text x="120" y="213" fill="#001634">╸</text>
+<rect x="130" y="192" width="10" height="24" fill="#0048b8"/>
+<text x="130" y="213" fill="#001c43">▆</text>
+<rect x="140" y="192" width="10" height="24" fill="#0047b0"/>
+<text x="140" y="213" fill="#000000">▆</text>
+<rect x="150" y="192" width="10" height="24" fill="#002d6e"/>
+<text x="150" y="213" fill="#000000">▆</text>
+<rect x="60" y="216" width="10" height="24" fill="#000000"/>
+<text x="60" y="237" fill="#004041">▗</text>
+<rect x="70" y="216" width="10" height="24" fill="#000c0e"/>
+<text x="70" y="237" fill="#00b5bb">▅</text>
+<rect x="80" y="216" width="10" height="24" fill="#00c1d8"/>
+<text x="80" y="237" fill="#002325">▃</text>
+<rect x="90" y="216" width="10" height="24" fill="#0092b2"/>
+<text x="90" y="237" fill="#000a0b">▅</text>
+<rect x="100" y="216" width="10" height="24" fill="#00080b"/>
+<text x="100" y="237" fill="#00525a">▗</text>
+<rect x="110" y="216" width="10" height="24" fill="#00aadb"/>
+<text x="110" y="237" fill="#003c42">▃</text>
+<rect x="120" y="216" width="10" height="24" fill="#000203"/>
+<text x="120" y="237" fill="#0083bf">▘</text>
+</g>
+<text x="450" y="128" fill="#f6f4ff" font-family="sans-serif" font-size="66" font-weight="700">Humming Bird</text>
+<text x="454" y="184" fill="#9aaac9" font-family="sans-serif" font-size="26">A little neon wilderness. Inside your terminal.</text>
+<text x="454" y="250" fill="#22d3ee" font-family="monospace" font-size="19">PLANT · PILOT · FLOCK · DRIFT</text>
+</svg>
