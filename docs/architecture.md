@@ -9,6 +9,10 @@ The CLI defaults to the garden; `--studio` selects the original tuning screen.
 
 ## Embed in another TUI
 
+For the browser host and automatic shared-source publishing, see
+[web architecture](web-architecture.md). Do not port the physics to JavaScript;
+the deployed browser game bundles these exact Python modules and approved assets.
+
 1. Load frames with `load_frames()`, `load_leaf_overlays()`, and `load_game_assets()`.
 2. Construct `GameRenderer` with those assets and `colored`, and `GameWorld` with
    terminal dimensions, monotonic time, and a random generator.

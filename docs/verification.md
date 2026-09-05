@@ -2,6 +2,16 @@
 
 ## v1.1.0 web / terminal verification — 2026-09-05
 
+- [Published web build](https://github.com/fire17/humming-bird/actions/runs/33988273170)
+  passed; the exact HTTPS domain was visually verified running at30fps with no
+  browser errors. HTTP redirects to HTTPS; certificate approved for the subdomain.
+- [Native v1.1.0 release](https://github.com/fire17/humming-bird/actions/runs/33988371452)
+  passed macOS14, Ubuntu22.04 and Windows2022 tests, builds and asset checks.
+- Fresh published-tag pipx installation passed version/check. Homebrew1.1.0
+  upgrade and brew test passed. Downloaded Mac ZIP checksum, embedded CLI asset
+  check and deep signature verification passed. Terminal window visual remains
+  unverified; no stronger claim is implied by these automated checks.
+
 - Native/WASM comparison: 24 birds, 60 hearts, 120 ticks, matching score, heart
   count, positions and wing phases (tolerance 1e-9); 67 captures with seed 42.
 - Browser: visually checked the live local canvas at 1280×720 and 390×844.

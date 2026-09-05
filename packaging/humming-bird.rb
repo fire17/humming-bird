@@ -3,8 +3,8 @@ class HummingBird < Formula
 
   desc "Living neon hummingbird garden in your terminal"
   homepage "https://github.com/fire17/humming-bird"
-  url "https://github.com/fire17/humming-bird/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "7e536cb7a4fc024d0e1cf8d8d5494f54d8c6c3a3be876915764a9ec05fc0f6eb"
+  url "https://github.com/fire17/humming-bird/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "00eb1b5696e30f318345976f9bc8544d3a7769d238eaac0ac0e6871633b18507"
   license "MIT"
 
   depends_on "python@3.12"
@@ -34,7 +34,7 @@ class HummingBird < Formula
 
   test do
     ENV["XDG_CONFIG_HOME"] = testpath.to_s
-    assert_match "Humming Bird 1.0.0", shell_output("#{bin}/humming-bird --version")
+    assert_match "Humming Bird 1.1.0", shell_output("#{bin}/humming-bird --version")
     assert_match "60 verified wing frames", shell_output("#{bin}/humming-bird --check")
   end
 end
