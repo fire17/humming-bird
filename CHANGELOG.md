@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.0 — 2026-09-05
+
+- Playable web garden with the same Python/WASM flight engine and approved art.
+- Worker-isolated simulation, batched transparent WebGL sprites and touch controls.
+- Responsive layout, independent held keys, saved settings, pause-on-hidden tabs.
+- Automatic tested website builds on main; live at hummingbird.akeyo.io.
+- Shared native/browser flock target policy with seeded WASM/native parity tests.
+
+- Mac app launcher uses WezTerm with a private, opaque-black RGB profile and Kitty
+  key events. It no longer silently falls back to Apple Terminal, whose color handling
+  corrupts the current RGB artwork. Missing WezTerm produces an install instruction.
+- Existing terminal profiles, artwork, and saved game settings remain unchanged.
+- Output-only truecolor/256/16 palette detection and explicit --color-mode override.
+
 ## 1.0.0 — 2026-09-05
 
 - First portable release of the neon hummingbird terminal garden and animation studio.

@@ -1,0 +1,380 @@
+:root {
+	color-scheme: dark;
+	font-family:
+		ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		sans-serif;
+	background: #000;
+	color: #dce7e8;
+	font-synthesis: none;
+	--line: #263034;
+	--quiet: #91a1a6;
+	--accent: #85ddd4;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	height: 100dvh;
+	display: grid;
+	grid-template-rows: 64px minmax(0, 1fr) 64px;
+	overflow: hidden;
+}
+button,
+input,
+summary,
+a {
+	touch-action: manipulation;
+}
+button,
+a,
+input,
+summary {
+	outline-offset: 4px;
+}
+button:focus-visible,
+a:focus-visible,
+canvas:focus-visible,
+summary:focus-visible {
+	outline: 2px solid var(--accent);
+}
+button {
+	font: inherit;
+	color: inherit;
+	background: #11181b;
+	border: 1px solid var(--line);
+	border-radius: 7px;
+	min-height: 44px;
+	padding: 0 15px;
+	cursor: pointer;
+}
+button:hover {
+	background: #202c30;
+}
+button[aria-pressed="true"] {
+	color: #a4f3e7;
+	border-color: #4a8b81;
+	background: #112d28;
+}
+button:disabled {
+	opacity: 0.5;
+	cursor: wait;
+}
+header,
+footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 18px;
+	padding: 8px 24px;
+	background: #080c0e;
+	z-index: 2;
+}
+header {
+	border-bottom: 1px solid var(--line);
+}
+footer {
+	border-top: 1px solid var(--line);
+}
+.brand {
+	font-size: 17px;
+	font-weight: 650;
+	text-decoration: none;
+	color: #e5eeed;
+	white-space: nowrap;
+}
+.brand span {
+	color: var(--quiet);
+	font-size: 10px;
+	letter-spacing: 0.15em;
+	display: block;
+	margin-top: 2px;
+}
+.stats {
+	display: flex;
+	gap: 24px;
+	font:
+		12px ui-monospace,
+		SFMono-Regular,
+		Consolas,
+		monospace;
+	color: var(--quiet);
+}
+.stats b {
+	color: #e8eeee;
+	margin-left: 5px;
+	font-variant-numeric: tabular-nums;
+}
+.controls {
+	display: flex;
+	gap: 8px;
+}
+kbd {
+	font:
+		10px ui-monospace,
+		monospace;
+	color: #85989e;
+	margin-left: 7px;
+}
+main {
+	position: relative;
+	min-height: 0;
+	overflow: hidden;
+}
+canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+	touch-action: none;
+}
+canvas:focus {
+	outline: none;
+}
+#hint {
+	position: absolute;
+	bottom: 12px;
+	left: 0;
+	width: 100%;
+	pointer-events: none;
+	color: #75868a;
+	font-size: 12px;
+	text-align: center;
+}
+#hint span {
+	margin: 0 8px;
+}
+#loading {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #000;
+	text-align: center;
+	padding: 24px;
+}
+#loading[hidden],
+[hidden] {
+	display: none !important;
+}
+h1 {
+	font-size: clamp(22px, 4vw, 32px);
+	font-weight: 500;
+	letter-spacing: -0.025em;
+	margin: 0 0 16px;
+}
+#loading p {
+	color: var(--accent);
+}
+#loading small {
+	color: var(--quiet);
+	line-height: 1.6;
+}
+#retry {
+	margin-top: 20px;
+}
+#settings {
+	position: absolute;
+	right: 16px;
+	top: 74px;
+	bottom: 76px;
+	width: 320px;
+	max-width: calc(100vw - 32px);
+	overflow-y: auto;
+	background: #0e1518;
+	border: 1px solid #334247;
+	border-radius: 10px;
+	padding: 18px;
+	z-index: 4;
+	box-shadow: 0 16px 48px #0009;
+}
+.panel-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+.panel-title h2 {
+	font-size: 18px;
+	margin: 0;
+	font-weight: 550;
+}
+.panel-title button {
+	font-size: 22px;
+	width: 44px;
+	padding: 0;
+}
+.range-label {
+	display: flex;
+	justify-content: space-between;
+	font-size: 13px;
+}
+.range-label output {
+	color: var(--accent);
+	font-variant-numeric: tabular-nums;
+}
+input[type="range"] {
+	width: 100%;
+	accent-color: var(--accent);
+	height: 34px;
+	margin: 2px 0 14px;
+}
+input[type="checkbox"] {
+	accent-color: var(--accent);
+	width: 18px;
+	height: 18px;
+	margin: 0 10px 0 0;
+}
+.check {
+	min-height: 44px;
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+	cursor: pointer;
+}
+.check kbd {
+	margin-left: auto;
+}
+details {
+	border-top: 1px solid var(--line);
+	margin-top: 14px;
+	padding-top: 8px;
+	font-size: 12px;
+	color: var(--quiet);
+	line-height: 1.9;
+}
+summary {
+	cursor: pointer;
+	min-height: 44px;
+	padding-top: 8px;
+	color: #d7e3e6;
+}
+.note {
+	font-size: 11px;
+	color: var(--quiet);
+	line-height: 1.6;
+}
+aside > a {
+	display: block;
+	font-size: 12px;
+	line-height: 2;
+	color: var(--accent);
+}
+#build {
+	display: block;
+	font:
+		10px ui-monospace,
+		monospace;
+	color: #71858d;
+	margin-top: 12px;
+}
+#performance {
+	font:
+		11px ui-monospace,
+		monospace;
+	color: #72878d;
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+}
+#joystick {
+	display: none;
+	position: absolute;
+	bottom: 45px;
+	left: 20px;
+	width: 104px;
+	height: 104px;
+	border: 1px solid #526b7380;
+	border-radius: 50%;
+	background: #13282e44;
+	touch-action: none;
+}
+#joystick span {
+	position: absolute;
+	inset: 32px;
+	border: 1px solid #94c2ca66;
+	border-radius: 50%;
+	background: #456b7566;
+	pointer-events: none;
+}
+@media (pointer: coarse), (max-width: 650px) {
+	body.piloting #joystick {
+		display: block;
+	}
+	#hint {
+		font-size: 11px;
+	}
+}
+@media (max-width: 650px) {
+	body {
+		grid-template-rows: 58px minmax(0, 1fr) 62px;
+	}
+	header,
+	footer {
+		padding: 6px 10px;
+		gap: 8px;
+	}
+	.brand {
+		font-size: 14px;
+	}
+	.brand span {
+		font-size: 8px;
+	}
+	.stats {
+		gap: 10px;
+		font-size: 10px;
+	}
+	.stats span:first-child {
+		display: none;
+	}
+	header button {
+		padding: 0 10px;
+		font-size: 12px;
+	}
+	.controls {
+		gap: 6px;
+	}
+	.controls button {
+		font-size: 12px;
+		padding: 0 10px;
+	}
+	.controls kbd {
+		display: none;
+	}
+	#performance {
+		font-size: 9px;
+		max-width: 65px;
+		white-space: normal;
+	}
+	#hint {
+		padding: 0 12px;
+		font-size: 10px;
+	}
+	#hint span {
+		margin: 0 3px;
+	}
+	#settings {
+		top: 66px;
+		bottom: 70px;
+	}
+}
+@media (max-height: 450px) {
+	body {
+		grid-template-rows: 48px minmax(0, 1fr) 50px;
+	}
+	header,
+	footer {
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+	.brand span {
+		display: none;
+	}
+	#hint {
+		display: none;
+	}
+	#settings {
+		top: 54px;
+		bottom: 55px;
+	}
+}

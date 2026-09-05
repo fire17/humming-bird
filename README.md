@@ -12,7 +12,7 @@
 
 ## For AI agents
 
-Install without editing shell profiles: `pipx install git+https://github.com/fire17/humming-bird.git@v1.0.0`
+Install without editing shell profiles: `pipx install git+https://github.com/fire17/humming-bird.git@v1.1.0`
 
 | When asked to… | Do this |
 | --- | --- |
@@ -23,13 +23,19 @@ Install without editing shell profiles: `pipx install git+https://github.com/fir
 
 Preserve saved settings; read them from disk, not remembered defaults. Never substitute
 emoji for the approved art. Keep the 32×12 cached sprite geometry intact. Verify visible
-changes in a real terminal, not just a test log. No telemetry or runtime network access.
+changes in a real terminal, not just a test log. No telemetry. The native app is
+network-free; the web app loads local-origin runtime files and checks for updates.
 
 [Install](#install) · [Play](#play) · [How it moves](#how-it-moves) · [Safety](#safety) · [Development](#development)
 
 *A small living thing in a place usually reserved for commands.*
 
 ## A garden that plays itself—or plays with you
+
+**[Play live in your browser →](https://hummingbird.akeyo.io/)** — no installation.
+The web garden runs the same Python game engine in a worker, with GPU-rendered
+approved art. Shared code and artwork automatically rebuild on every main push.
+See [web architecture and development](docs/web-architecture.md).
 
 Double-click to plant a spinning neon heart. A hummingbird banks toward it, feeds,
 and settles on a blade of grass. Add a flock, scatter nectar in waves, or take the
@@ -48,6 +54,12 @@ approach poses. No image-generation service, Chafa, or GPU is needed to play.
 
 ## Install
 
+> [!NOTE]
+> The Mac app uses WezTerm with an isolated full-color profile.
+> Install it with `brew install --cask wezterm` first. The CLI also detects reduced
+> palettes in other terminals; use `--color-mode 256` or `--color-mode truecolor`
+> to override detection. Reduced palettes approximate the original colors.
+
 **macOS / Linux with Homebrew:**
 
 ```sh
@@ -58,7 +70,7 @@ humming-bird
 **Fastest portable install** (Python 3.10+ and [pipx](https://pipx.pypa.io/)):
 
 ```sh
-pipx install git+https://github.com/fire17/humming-bird.git@v1.0.0
+pipx install git+https://github.com/fire17/humming-bird.git@v1.1.0
 humming-bird
 ```
 
@@ -67,7 +79,7 @@ The package is installed from GitHub, **not currently published on PyPI**.
 
 | Platform | No-Python download | Launch |
 | --- | --- | --- |
-| macOS Apple Silicon | [Release ZIP](https://github.com/fire17/humming-bird/releases/latest) → extract **Humming Bird.app** | Move to Applications and open; it launches Terminal |
+| macOS Apple Silicon | [Release ZIP](https://github.com/fire17/humming-bird/releases/latest) → extract **Humming Bird.app** | Move to Applications and open; it launches WezTerm |
 | Linux x86-64 / WSL | Release `linux-x86_64.tar.gz` → extract | `./humming-bird/humming-bird` |
 | Windows x86-64 | Release `windows-x86_64.zip` → extract | In PowerShell: `.\humming-bird\humming-bird.exe` |
 | Intel Mac / Linux ARM | Use the pipx command above | `humming-bird` |
@@ -149,7 +161,7 @@ as a workaround. The original Chafa conversion uses `--font-ratio 3/8 --size 32x
 
 | Concern | Behavior / undo |
 | --- | --- |
-| Network / privacy | No runtime network calls, telemetry, or global input hooks |
+| Network / privacy | Native: no network. Web: same-origin assets and update checks. Neither uses telemetry or global input hooks |
 | Configuration | Only `~/.config/hummingbird-tui/settings.json` (or `$XDG_CONFIG_HOME/hummingbird-tui/settings.json`) |
 | Terminal state | Input mode and cursor restored on normal exit / Ctrl+C |
 | Processes | One worker per companion, bounded to 23; workers shut down with the game |

@@ -1,0 +1,17 @@
+{
+	"name": "humming-bird-web",
+	"version": "1.1.0",
+	"dependencies": {
+		"pyodide": "314.0.6"
+	},
+	"private": true,
+	"scripts": {
+		"build": "bun scripts/build_web.mjs",
+		"dev": "bun scripts/serve_web.mjs",
+		"test": "node scripts/test_web_runtime.mjs"
+	},
+	"type": "module",
+	"devDependencies": {
+		"@biomejs/biome": "2.1.1"
+	}
+}

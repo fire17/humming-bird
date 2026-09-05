@@ -13,3 +13,7 @@ dist/
 .DS_Store
 private-evidence/
 scripts/snapshot_manifest.py
+node_modules/
+web-dist/
+test-results/
+playwright-report/

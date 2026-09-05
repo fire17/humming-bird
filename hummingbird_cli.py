@@ -6,7 +6,7 @@ import sys
 def main():
     multiprocessing.freeze_support()
     if "--version" in sys.argv:
-        print("Humming Bird 1.0.0")
+        print("Humming Bird 1.1.0")
         return 0
     if "--studio" in sys.argv:
         sys.argv.remove("--studio")

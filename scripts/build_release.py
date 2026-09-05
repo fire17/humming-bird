@@ -26,17 +26,11 @@ def build():
     name = f"humming-bird-{system}-{arch}"
     if system == "macos":
         app = DIST / "Humming Bird.app"
-        # The app opens a real Terminal window; no embedded-output-pane rendering.
-        script = '''on run
-set appPath to POSIX path of (path to me)
-set gamePath to appPath & "Contents/Resources/humming-bird/humming-bird"
-tell application "Terminal"
-activate
-do script quoted form of gamePath
-end tell
-end run
-'''
-        subprocess.run(["osacompile", "-o", str(app), "-e", script], check=True)
+        # RGB art must run in a capable terminal, with an isolated app profile.
+        subprocess.run(["osacompile", "-o", str(app),
+                        str(ROOT / "packaging/macos-launcher.applescript")], check=True)
+        for resource in ("launch-wezterm.sh", "humming-bird-wezterm.lua"):
+            shutil.copy2(ROOT / "packaging" / resource, app / "Contents/Resources" / resource)
         shutil.copytree(folder, app / "Contents/Resources/humming-bird", dirs_exist_ok=True)
         iconset = DIST / "HummingBird.iconset"
         iconset.mkdir(exist_ok=True)
@@ -53,7 +47,7 @@ end run
         with info_path.open("rb") as stream:
             info = plistlib.load(stream)
         info.update(CFBundleIdentifier="io.github.fire17.humming-bird",
-                    CFBundleName="Humming Bird", CFBundleShortVersionString="1.0.0",
+                    CFBundleName="Humming Bird", CFBundleShortVersionString="1.1.0",
                     CFBundleIconFile="HummingBird",
                     NSHighResolutionCapable=True)
         with info_path.open("wb") as stream:

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "humming-bird-game"
-version = "1.0.0"
+version = "1.1.0"
 description = "A living neon hummingbird garden in your terminal"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,7 +20,7 @@ Issues = "https://github.com/fire17/humming-bird/issues"
 humming-bird = "hummingbird_cli:main"
 
 [tool.setuptools]
-py-modules = ["hummingbird_cli", "hummingbird_tui", "hummingbird_terminal", "hummingbird_game", "hummingbird_brain", "hummingbird_swarm"]
+py-modules = ["hummingbird_cli", "hummingbird_tui", "hummingbird_terminal", "hummingbird_game", "hummingbird_brain", "hummingbird_swarm", "hummingbird_flock", "hummingbird_colors"]
 packages = ["humming_bird_assets"]
 
 [tool.setuptools.package-data]

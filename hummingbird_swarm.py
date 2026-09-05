@@ -11,6 +11,7 @@ from typing import Any
 
 from hummingbird_brain import AutonomousBirdBrain, visual_distance
 from hummingbird_game import RemoteBird
+from hummingbird_flock import assign_targets, step_brain
 
 
 MAX_FLOCK_SIZE = 24
@@ -47,23 +48,7 @@ def _worker_main(connection: Connection, ident: int, seed: int, hue_shift: float
             message = connection.recv()
             if message.get("op") == "stop":
                 break
-            result = brain.step(
-                now=float(message["now"]),
-                dt=float(message["dt"]),
-                width=int(message["width"]),
-                compact=bool(message["compact"]),
-                play_top=int(message["play_top"]),
-                play_bottom=int(message["play_bottom"]),
-                count=int(message["count"]),
-                primary_leaf=int(message["primary_leaf"]),
-                hearts=tuple(message["hearts"]),
-                leaves=tuple(message["leaves"]),
-                assigned_target=message.get("target_id"),
-                neighbors=tuple(message["neighbors"]),
-                calm=bool(message.get("calm", False)),
-                extended_board=bool(message.get("extended_board", False)),
-                view_origin=tuple(message.get("view_origin", (0, 0))),
-            )
+            result = step_brain(brain, message)
             connection.send({
                 "ident": ident,
                 "x": result.x,
@@ -138,44 +123,10 @@ class SwarmManager:
 
     def prepare(self, world: Any) -> None:
         """Reserve each nectar for the closest eligible bird, then stay sticky."""
-        live_hearts = {heart.ident: heart for heart in world.hearts}
-        eligible = set(self.workers)
-        if not world.player_mode:
-            eligible.add(1)
-        self.reservations = {
-            bird_id: heart_id
-            for bird_id, heart_id in self.reservations.items()
-            if bird_id in eligible and heart_id in live_hearts
-        }
-        reserved_hearts = set(self.reservations.values())
-        free_birds = eligible - set(self.reservations)
-        free_hearts = set(live_hearts) - reserved_hearts
-
-        positions: dict[int, tuple[float, float]] = {}
-        if 1 in free_birds:
-            positions[1] = world._bird_center()
-        for ident in free_birds:
-            worker = self.workers.get(ident)
-            if worker is not None and worker.latest is not None:
-                positions[ident] = (
-                    worker.latest.x + (1.0 if world.compact else 15.5),
-                    worker.latest.y + (0.0 if world.compact else 5.5),
-                )
-
-        candidates: list[tuple[float, int, int]] = []
-        for bird_id, (bird_x, bird_y) in positions.items():
-            for heart_id in free_hearts:
-                heart = live_hearts[heart_id]
-                heart_x = heart.x + (0.5 if world.compact else 2.5)
-                heart_y = heart.y + (0.0 if world.compact else 0.5)
-                candidates.append((visual_distance(heart_x - bird_x, heart_y - bird_y), bird_id, heart_id))
-        for _, bird_id, heart_id in sorted(candidates):
-            if bird_id in self.reservations or heart_id in reserved_hearts:
-                continue
-            self.reservations[bird_id] = heart_id
-            reserved_hearts.add(heart_id)
-
-        world.assigned_target_id = self.reservations.get(1) if not world.player_mode else None
+        self.reservations = assign_targets(
+            world, {ident: handle.latest for ident, handle in self.workers.items()},
+            self.reservations,
+        )
 
     def update(self, world: Any, now: float, dt: float) -> None:
         for worker in tuple(self.workers.values()):

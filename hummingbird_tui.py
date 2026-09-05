@@ -21,6 +21,10 @@ from typing import Callable
 import pyte
 import humming_bird_assets
 from hummingbird_terminal import read_input, start_input
+from hummingbird_colors import ColorEncoder, select_color_mode
+
+# Output-only adapter. Asset extraction always retains the original RGB values.
+OUTPUT_COLORS = ColorEncoder("truecolor")
 
 from hummingbird_game import (
     DOUBLE_CLICK_SECONDS,
@@ -495,7 +499,7 @@ def draw_game(
 ) -> tuple[str, str]:
     pieces = ["\x1b[?25l"]
     if clear:
-        pieces.append("\x1b[2J")
+        pieces.append("\x1b[0m\x1b[48;2;0;0;0m\x1b[2J")
         previous = {}
     for row, column in sorted(set(previous) | set(scene)):
         old = previous.get((row, column))
@@ -503,7 +507,7 @@ def draw_game(
         if old == new:
             continue
         pieces.append(f"\x1b[{row + 1};{column + 1}H")
-        pieces.append("\x1b[0m " if new is None else cell_escape(new))
+        pieces.append("\x1b[0m\x1b[48;2;0;0;0m " if new is None else OUTPUT_COLORS.cell_escape(new))
 
     top, bottom = world.status(now)
     if paused:
@@ -528,7 +532,7 @@ def draw_game(
                 bottom + " " * max(0, len(old_bottom) - len(bottom)),
             ))
     pieces.append("\x1b[0m")
-    os.write(sys.stdout.fileno(), "".join(pieces).encode("utf-8"))
+    os.write(sys.stdout.fileno(), OUTPUT_COLORS.ansi("".join(pieces)).encode("utf-8"))
     return top, bottom
 
 
@@ -944,7 +948,7 @@ def draw(
         + "  VS15 requests monochrome; fallback color depends on the terminal font."
         + "\x1b[0m"
     )
-    os.write(sys.stdout.fileno(), payload.encode("utf-8"))
+    os.write(sys.stdout.fileno(), OUTPUT_COLORS.ansi(payload).encode("utf-8"))
 
 
 def parse_args() -> argparse.Namespace:
@@ -970,11 +974,18 @@ def parse_args() -> argparse.Namespace:
         help="start directly in the responsive mouse-enabled garden game",
     )
     parser.add_argument("--check", action="store_true", help="validate and pre-render frames, then exit")
+    parser.add_argument("--color-mode", choices=("auto", "truecolor", "256", "16"), default=None,
+                        help="terminal output palette (default: detect; override with HUMMINGBIRD_COLOR_MODE)")
     return parser.parse_args()
 
 
 def main() -> int:
+    global OUTPUT_COLORS
     args = parse_args()
+    try:
+        OUTPUT_COLORS = ColorEncoder(select_color_mode(args.color_mode).mode)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
     normal_fps = min(240.0, max(1.0, args.fps))
     simulated = args.simulate_150_at_30
     sim_speed_level = 9
