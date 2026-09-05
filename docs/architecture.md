@@ -23,7 +23,7 @@ the deployed browser game bundles these exact Python modules and approved assets
 5. Close worker processes and restore terminal modes on every exit path. For frozen
    executables, call `multiprocessing.freeze_support()` before imports/argument parsing.
 
-Scene values are `pyte.screens.Char` objects keyed by cell `(x, y)` positions. Preserve
+Scene values are `pyte.screens.Char` objects keyed by cell `(row, column)` positions. Preserve
 foreground/background colors, glyphs, and layer order. A space with a colored background
 is not transparent. The compositor treats exact black channels as a color key and uses
 approximate glyph coverage; this is not a general-purpose pixel-alpha implementation.
