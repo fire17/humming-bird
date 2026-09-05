@@ -17,7 +17,9 @@ actual result. Do not equate a successful cross-platform import with native inpu
 
 The development garden has been visually iterated in a real macOS WezTerm window,
 including multi-bird overlap, resize, extended-world camera, and approved artwork.
-The release build is also checked in a real local terminal before handoff.
+The frozen release build is exercised through a local PTY. Desktop-control access to
+Terminal/WezTerm is blocked in the release session, so the new app window is **not yet
+visually verified**; earlier development-session visual approval does not replace that.
 Linux/Windows CI is automated verification, not a claim of human visual approval.
 WSL runs the Linux build; an actual WSL desktop session is not available on this host.
 The no-Python macOS release targets Apple Silicon; Intel Mac uses Python installation.

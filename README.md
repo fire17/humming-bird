@@ -1,6 +1,6 @@
 # Humming Bird
 
-![Humming Bird — a little neon wilderness](assets/banner.svg)
+<div align="center"><img width="100%" src="assets/banner.svg" alt="Humming Bird — a little neon wilderness"></div>
 
 [![Build](https://github.com/fire17/humming-bird/actions/workflows/ci.yml/badge.svg)](https://github.com/fire17/humming-bird/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/fire17/humming-bird)](https://github.com/fire17/humming-bird/releases)
@@ -8,6 +8,7 @@
 [![Python](https://img.shields.io/badge/python-3.10%2B-38bdf8)](pyproject.toml)
 [![Render](https://img.shields.io/badge/render-30_Hz-22d3ee)](#how-it-moves)
 [![Platforms](https://img.shields.io/badge/macOS-Linux_%C2%B7_WSL_%C2%B7_Windows-d946ef)](#install)
+[![Stars](https://img.shields.io/github/stars/fire17/humming-bird?style=social)](https://github.com/fire17/humming-bird/stargazers)
 
 ## For AI agents
 
@@ -26,6 +27,8 @@ changes in a real terminal, not just a test log. No telemetry or runtime network
 
 [Install](#install) · [Play](#play) · [How it moves](#how-it-moves) · [Safety](#safety) · [Development](#development)
 
+*A small living thing in a place usually reserved for commands.*
+
 ## A garden that plays itself—or plays with you
 
 Double-click to plant a spinning neon heart. A hummingbird banks toward it, feeds,
@@ -35,6 +38,13 @@ controls yourself. It's a tiny living world, made of colored terminal cells.
 The artwork is actual multi-cell Unicode/ANSI art, not one bird emoji. The runtime
 ships the approved 60-pose wing cycle, eight independent heart phases, and 16 leaf
 approach poses. No image-generation service, Chafa, or GPU is needed to play.
+
+- Fast motion and redraw rate are separate: [phase sampler](hummingbird_tui.py).
+- Every companion is independently simulated: [worker lifecycle](hummingbird_swarm.py).
+- The whole scene adapts to resize: [camera/resize tests](test_game_mode.py).
+
+> [!IMPORTANT]
+> A living terminal garden—not a looping video or a single emoji.
 
 ## Install
 
@@ -96,6 +106,8 @@ flowchart LR
   Assets[60 wing poses + 8 heart phases] --> Scene[Cell compositor]
   World --> Scene
   Scene --> Terminal[30 Hz terminal redraw]
+  style World fill:#231638,stroke:#bc7deb,color:#f7f0ff
+  style Terminal fill:#102c35,stroke:#22d3ee,color:#efffff
 ```
 
 | Feature | Implementation |
@@ -163,8 +175,33 @@ continuity, then a responsive garden. The approved ANSI caches are included unde
 Private conversations and incidental desktop captures are deliberately **not** published.
 Future integrations should preserve the [rendering contract](docs/architecture.md).
 
+```mermaid
+flowchart LR
+  Generate[Generate wing anchors] --> Review[Review real terminal scale]
+  Review --> Correct[Correct shoulder and tail]
+  Correct --> Cache[Build approved pose cache]
+  Cache --> Game[Add living garden]
+  Game --> Verify[Test and package each OS]
+```
+
+| Tool / process | Contribution |
+| --- | --- |
+| Codex + image generation | Collaborative implementation and raster anchor art |
+| Chafa + real-terminal review | Conversion and visual iteration at the intended scale |
+| Save-and-ship / README / ripple skills | Private history preservation, release packaging, public docs and registry |
+| Python unittest + PyInstaller | Behavior gates and self-contained platform builds |
+
+Defects caught along the way: a doubled beak-like rendering seam in embedded terminals,
+misplaced wing shoulders, missing tail/leaf cells, and—in the Windows adapter—Shift+N
+being mistaken for lowercase n. The latter has a regression test.
+
 If this little garden makes your terminal feel alive, [give it a star](https://github.com/fire17/humming-bird/stargazers).
+[![Star History Chart](https://api.star-history.com/svg?repos=fire17/humming-bird&type=Date)](https://star-history.com/#fire17/humming-bird&Date)
+
 Built on [pyte](https://github.com/selectel/pyte) and [wcwidth](https://github.com/jquast/wcwidth);
 original raster-to-terminal conversion used [Chafa](https://github.com/hpjansson/chafa).
+Related work: [fire17's ShipIt](https://github.com/fire17/shipit).
 
 [MIT License](LICENSE) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/fire17/humming-bird/issues)
+
+<div align="center"><sub><i>Leave a little room for wonder between the prompts.</i></sub></div>
