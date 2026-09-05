@@ -38,11 +38,23 @@ end run
 '''
         subprocess.run(["osacompile", "-o", str(app), "-e", script], check=True)
         shutil.copytree(folder, app / "Contents/Resources/humming-bird", dirs_exist_ok=True)
+        iconset = DIST / "HummingBird.iconset"
+        iconset.mkdir(exist_ok=True)
+        for size in (16, 32, 128, 256, 512):
+            for density in (1, 2):
+                suffix = "@2x" if density == 2 else ""
+                icon = iconset / f"icon_{size}x{size}{suffix}.png"
+                subprocess.run(["sips", "-s", "format", "png", "-z", str(size * density),
+                                str(size * density), str(ROOT / "assets/favicon.svg"),
+                                "--out", str(icon)], check=True, stdout=subprocess.DEVNULL)
+        subprocess.run(["iconutil", "-c", "icns", str(iconset), "-o",
+                        str(app / "Contents/Resources/HummingBird.icns")], check=True)
         info_path = app / "Contents/Info.plist"
         with info_path.open("rb") as stream:
             info = plistlib.load(stream)
         info.update(CFBundleIdentifier="io.github.fire17.humming-bird",
                     CFBundleName="Humming Bird", CFBundleShortVersionString="1.0.0",
+                    CFBundleIconFile="HummingBird",
                     NSHighResolutionCapable=True)
         with info_path.open("wb") as stream:
             plistlib.dump(info, stream)
