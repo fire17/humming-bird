@@ -12,3 +12,4 @@ dist/
 *.spec
 .DS_Store
 private-evidence/
+scripts/snapshot_manifest.py

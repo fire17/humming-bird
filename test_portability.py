@@ -34,7 +34,19 @@ class InputTests(unittest.TestCase):
         # CI may have redirected stdio. Give the test its own console, never a hook.
         kernel = terminal.kernel
         allocated = bool(kernel.AllocConsole())
-        input_handle = kernel.GetStdHandle(-10)
+        # Hosted runners retain redirected std handles even after AllocConsole.
+        # Open the new console explicitly, then restore those redirected handles.
+        kernel.CreateFileW.argtypes = [W.LPCWSTR, W.DWORD, W.DWORD, W.LPVOID, W.DWORD, W.DWORD, W.HANDLE]
+        kernel.CreateFileW.restype = W.HANDLE
+        kernel.SetStdHandle.argtypes = [W.DWORD, W.HANDLE]
+        kernel.CloseHandle.argtypes = [W.HANDLE]
+        saved_input, saved_output = kernel.GetStdHandle(-10), kernel.GetStdHandle(-11)
+        input_handle = kernel.CreateFileW("CONIN$", 0xC0000000, 3, None, 3, 0, None)
+        output_handle = kernel.CreateFileW("CONOUT$", 0xC0000000, 3, None, 3, 0, None)
+        self.assertNotEqual(input_handle, W.HANDLE(-1).value)
+        self.assertNotEqual(output_handle, W.HANDLE(-1).value)
+        kernel.SetStdHandle(-10, input_handle)
+        kernel.SetStdHandle(-11, output_handle)
         mode = W.DWORD()
         if not kernel.GetConsoleMode(input_handle, C.byref(mode)):
             self.fail("A Windows console could not be allocated for the integration test")
@@ -61,6 +73,10 @@ class InputTests(unittest.TestCase):
             after = W.DWORD()
             kernel.GetConsoleMode(input_handle, C.byref(after))
             self.assertEqual(after.value, mode.value)
+            kernel.SetStdHandle(-10, saved_input)
+            kernel.SetStdHandle(-11, saved_output)
+            kernel.CloseHandle(input_handle)
+            kernel.CloseHandle(output_handle)
             if allocated:
                 kernel.FreeConsole()
 

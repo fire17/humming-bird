@@ -90,8 +90,6 @@ class TerminalInput:
             if not kernel.SetConsoleMode(self.output, self.saved_out.value | 0x0004):
                 raise OSError("This console does not support ANSI output. Use Windows Terminal.")
             kernel.SetConsoleOutputCP(65001)
-            import msvcrt
-            msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
         except Exception:
             self.close()
             raise
